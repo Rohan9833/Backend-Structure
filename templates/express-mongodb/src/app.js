@@ -9,10 +9,17 @@ import { errorHandler } from "./middleware/errorHandler.js";
 const app = express();
 
 app.use(helmet());
+const allowedOrigins = process.env.CLIENT_ORIGIN
+  ? process.env.CLIENT_ORIGIN.split(",").map((origin) => origin.trim())
+  : null;
+
 app.use(cors({
-  origin: process.env.CLIENT_ORIGIN
-    ? process.env.CLIENT_ORIGIN.split(",").map((origin) => origin.trim())
-    : true
+  origin(origin, callback) {
+    if (!origin || !allowedOrigins || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error("Origin not allowed by CORS"));
+  }
 }));
 app.use(express.json({ limit: "1mb" }));
 app.use(express.urlencoded({ extended: true }));
