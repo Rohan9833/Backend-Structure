@@ -1,36 +1,51 @@
-# Create Our Backend
+# Backend Structure CLI
 
-A free CLI scaffold for creating a structured Node.js + Express backend.
+A free CLI project for generating a starter Node.js + Express backend with a MongoDB/Mongoose model layer.
 
-## Current status
+## What's included
 
-This repository contains the source code for the generator. Once this project is published as a public npm package, users will be able to run:
+- Express 5 with JSON parsing
+- Helmet security headers
+- Configurable CORS via `CLIENT_ORIGIN`
+- MongoDB connection using Mongoose
+- Health endpoint at `GET /api/health`
+- Example CRUD foundation: routes, controller, service, and model
+- Centralized 404 and error-handling middleware
+- `.env.example` and `.gitignore`
+
+## Create a project from this repository
+
+Until the CLI has been published to npm, clone this repository and run:
+
+```powershell
+git clone https://github.com/Rohan9833/Backend-Structure.git
+cd Backend-Structure
+node bin/cli.js my-api
+cd my-api
+npm install
+Copy-Item .env.example .env
+npm run dev
+```
+
+Configure `MONGODB_URI` in the new project's `.env`. A local MongoDB instance is required for the example endpoints; the health endpoint can run without a database connection.
+
+Then open `http://localhost:5000/api/health`.
+
+## Published npm command (after publishing)
+
+The intended package name is `create-our-backend`, subject to npm name availability. After it is published, users will be able to run:
 
 ```bash
 npm create our-backend@latest my-api
 ```
 
-The package name above is a placeholder and must be checked for availability before publishing.
+## Publish checklist
 
-## Development
+1. Check package-name availability on npm.
+2. Test the scaffold from a clean directory on a supported Node.js version.
+3. Review dependencies, code, and security defaults.
+4. Sign in with `npm login`.
+5. Run `npm pack --dry-run` and inspect the package contents.
+6. Publish with `npm publish --access public`.
 
-```bash
-npm install
-node bin/cli.js example-api
-cd example-api
-npm install
-cp .env.example .env
-npm run dev
-```
-
-The starter includes Express, MongoDB/Mongoose configuration, health checking, error handling, and example route/controller/service/model files.
-
-## Publishing
-
-1. Check that the intended npm package name is available.
-2. Update the package name and README with the final package name.
-3. Test with `npm pack --dry-run`.
-4. Log in with `npm login`.
-5. Publish with `npm publish --access public`.
-
-Publishing to npm is not performed automatically by this repository.
+Publishing is not automatic; it requires an npm account and a deliberate publish command.
