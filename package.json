@@ -1,0 +1,25 @@
+{
+  "name": "create-our-backend",
+  "version": "0.1.0",
+  "description": "Generate a structured Node.js Express backend project",
+  "type": "module",
+  "bin": {
+    "create-our-backend": "./bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "templates",
+    "README.md"
+  ],
+  "keywords": [
+    "backend",
+    "express",
+    "scaffolding",
+    "generator",
+    "cli"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  }
+}
